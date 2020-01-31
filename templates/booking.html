@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>TINYSTEPS</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+  {% include 'header.html' %}
+  <main class="container mt-3">
+    <div class="row mt-5">
+      <div class="col-10 col-md-6 offset-1 offset-md-3 mb-3">
+        <form action="/booking_done/" class="card mb-3" method="post">
+          <div class="card-body text-center pt-5">
+            <img src={{teacher.picture}} class="mb-3" width="95" alt="">
+            <h2 class="h5 card-title mt-2 mb-2">{{teacher.name}}</h2>
+            <p class="my-1">Запись на пробный урок</p>
+            <p class="my-1">{{day}}, {{time}}</p>
+          </div>
+          <hr />
+          <div class="card-body mx-3">
+            <label class="mb-1 mt-2" for="clientName">Вас зовут</label>
+            <input class="form-control" type="text" name="clientName" placeholder="Введите ваше имя">
+            <input class="form-control" type="hidden" name="time" value="{{ time }}">
+            <input class="form-control" type="hidden" name="day" value="{{ day }}">
+            <input class="form-control" type="hidden" name="teacher" value="{{ teacher.name }}">
+            <label class="mb-1 mt-2" for="clientPhone">Ваш телефон</label>
+            <input class="form-control" type="tel"  name="clientPhone" placeholder="Введите ваш номер телефона">
+            <input type="submit" class="btn btn-primary btn-block mt-4" value="Записаться на пробный урок">
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+{% macro render_teachers(teachers,goal=False) %}
+    {% if goal %}{% set teachers=teachers|sort(attribute="rating",reverse=True) %}{% endif %}
+
+      <div class="col-12 col-lg-10 offset-lg-1 m-auto">
+         {% for teacher in teachers %}
+         <div class="card mb-4">
+           <div class="card-body">
+            <div class="row">
+              <div class="col-3"><img src='{{ teacher.picture }}' class="img-fluid" alt=""></div>
+              <div class="col-9">
+                <p class="float-right">Рейтинг: {{ teacher.rating }} Ставка: {{ teacher.price }} / час</p>
+                <h2 class="h4">{{ teacher.name }}</h2>
+                <p>{{ teacher.about|truncate(170) }}</p>
+                <a href='/profiles/{{ teacher.id }}/' class="btn btn-outline-primary btn-sm mr-3 mb-2">Показать информаци и расписание</a>
+
+               </div>
+             </div>
+           </div>
+         </div>
+         {% endfor %}
+
+
+      </div>
+
+{% endmacro %}
+
+
+{% macro render_profile(teacher) %}
+    {% set calender=teacher['free'] %}
+    {% set days=calender.keys() %}
+    {% set times=calender['mon'].keys() %}
+    <div class="card-body m-2 m-md-4">
+        <h2 class="h5 mb-4">Записаться на пробный урок</h2>
+        <form action="/booking/{{ teacher.id  }}/" method="post">
+        <table class="table" >
+          <tr>
+            <th><span class="btn font-weight-bold py-0">#</span></th>
+            <th>Пн</th>
+            <th>Вт</th>
+            <th>Ср</th>
+            <th>Чт</th>
+            <th>Пт</th>
+            <th>Сб</th>
+            <th>Вс</th>
+          </tr>
+          {% for time in times %}
+          <tr>
+            <td><span class="btn">{{ time }}</span></td>
+            {% for day in days %}
+            {% if calender[day][time] == 'False' %}
+                <td><button  type="button" class="btn btn-sm btn-secondary" disabled>{{ time }}</button></td>
+            {% else %}
+                <td><button  name="time" value="{{ time }} {{ day }}" class="btn btn-sm btn-success" >{{ time }}</button></td>
+            {% endif %}
+            {% endfor %}
+          </tr>
+          {% endfor %}
+
+        </table>
+        </form>
+    </div>
+{% endmacro %}
