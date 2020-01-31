@@ -12,6 +12,14 @@ def index():
 
     return render_template('index.html', teacher=random)
 
+@app.route("/all/")
+def all():
+    with open("data.json","r",encoding="utf-8") as f:
+        teachers = json.load(f)["teachers"]
+    return render_template('all.html',teacher=teachers)
+
+
+
 
 @app.route('/profiles/<int:id>/')
 def profile(id):

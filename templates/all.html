@@ -1,33 +1,20 @@
 <!DOCTYPE html>
-<html lang="ru">
-
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>TINYSTEPS</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-
 <body>
 {% from 'macros.html' import render_teachers with context %}
 {% include 'header.html' %}
   <main class="container mt-3">
-    {% if request.path == "/goals/travel/" %}
-    <h1 class="h1 text-center w-50 mx-auto mt-1 py-5 mb-4"><strong>⛱<br />Преподаватели <br>{{goals[goal]}}</strong></h1>
-    {% endif %}
-    {% if request.path == "/goals/study/" %}
-    <h1 class="h1 text-center w-50 mx-auto mt-1 py-5 mb-4"><strong>🏫 <br />Преподаватели <br>{{goals[goal]}}</strong></h1>
-    {% endif %}
-    {% if request.path == "/goals/work/" %}
-    <h1 class="h1 text-center w-50 mx-auto mt-1 py-5 mb-4"><strong>🏢 <br />Преподаватели <br>{{goals[goal]}}</strong></h1>
-    {% endif %}
-    {% if request.path == "/goals/relocate/" %}
-    <h1 class="h1 text-center w-50 mx-auto mt-1 py-5 mb-4"><strong>🚜<br />Преподаватели <br>{{goals[goal]}}</strong></h1>
-    {% endif %}
+    <h1 class="h1 text-center w-50 mx-auto mt-1 py-5 mb-4"><strong>🖤<br />Преподаватели <br>по всем направлениям</strong></h1>
+
 
     </div>
       <div class="row">
-       {{ render_teachers(teacher,goal) }}
-
+       {{ render_teachers(teacher) }}
     </div>
 
     <h2 class="text-center mt-5 mb-3">Не нашли своего репетитора?</h2>

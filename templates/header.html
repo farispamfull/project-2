@@ -9,9 +9,9 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             {% if request.path=='/request/' %}{% set active="active" %}{% endif %}
-
-          <li class="nav-item">
-            <a class="nav-link" href="#">Все репетиторы</a>
+            {% if request.path=='/all/' %}{% set allactive='active' %}{% endif %}
+          <li class="nav-item {{ allactive }}">
+            <a class="nav-link" href="/all/">Все репетиторы</a>
           </li>
           <li class="nav-item {{ active }}">
             <a class="nav-link" href="/request/" >Заявка на подбор</a>

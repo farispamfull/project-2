@@ -1,5 +1,5 @@
 {% macro render_teachers(teachers,goal=False) %}
-    {% if goal %}{% set teachers=teachers|sort(attribute="rating",reverse=True) %}{% endif %}
+    {% set teachers=teachers|sort(attribute="rating",reverse=True) %}
 
       <div class="col-12 col-lg-10 offset-lg-1 m-auto">
          {% for teacher in teachers %}
