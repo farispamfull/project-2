@@ -1,37 +1,25 @@
-<!DOCTYPE html>
-<html lang="ru">
-
-<head>
-  <meta charset="UTF-8">
-  <title>TINYSTEPS</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-
-<body>
-{% include 'header.html' %}
+{% extends 'base.html'%}
+{% block main %}
 {% from 'macros.html' import render_profile with context %}
+{% set name={"travel": "Для путешествий",
+           "study": "Для учебы",
+           "work": "Для работы",
+           "relocate": "Для переезда"} %}
 
-  <main class="container mt-3">
     <div class="card my-4 mx-auto">
       <div class="card-body m-2 m-md-4">
         <div class="row">
           <div class="col-5"><img src="{{teacher.picture}}" class="img-fluid" alt=""></div>
           <div class="col-7">
             <h1 class="h2">{{ teacher.name }}</h1>
-            <p>{% for goal in teacher.goals %}<span class="badge badge-secondary mr-2">{{ goals[goal] }}</span>{% endfor %}Рейтинг: {{teacher.rating}} Ставка: {{teacher.price}} / час</p>
+            <p>{% for goal in goals %}<a href={{ url_for("goals",goal=goal.name)}}><span class="badge badge-secondary mr-2">{{ name[goal.name] }}</span></a>{% endfor %}Рейтинг: {{teacher.rating}} Ставка: {{teacher.price}} / час</p>
               <p>{{ teacher.about }}</p>
             <br> <br>
 
           </div>
         </div>
       </div>
-      {{ render_profile(teacher) }}
+      {{ render_profile(teacher,calendar) }}
       </div>
     </div>
-  </main>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
-
-</html>
+{% endblock %}

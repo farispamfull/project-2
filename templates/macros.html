@@ -1,6 +1,4 @@
 {% macro render_teachers(teachers,goal=False) %}
-    {% set teachers=teachers|sort(attribute="rating",reverse=True) %}
-
       <div class="col-12 col-lg-10 offset-lg-1 m-auto">
          {% for teacher in teachers %}
          <div class="card mb-4">
@@ -25,13 +23,11 @@
 {% endmacro %}
 
 
-{% macro render_profile(teacher) %}
-    {% set calender=teacher['free'] %}
-    {% set days=calender.keys() %}
-    {% set times=calender['mon'].keys() %}
+{% macro render_profile(teacher,calendar) %}
+
     <div class="card-body m-2 m-md-4">
         <h2 class="h5 mb-4">Записаться на пробный урок</h2>
-        <form action="/booking/{{ teacher.id  }}/" method="post">
+
         <table class="table" >
           <tr>
             <th><span class="btn font-weight-bold py-0">#</span></th>
@@ -43,14 +39,14 @@
             <th>Сб</th>
             <th>Вс</th>
           </tr>
-          {% for time in times %}
+          {% for time in ('8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00') %}
           <tr>
             <td><span class="btn">{{ time }}</span></td>
-            {% for day in days %}
-            {% if calender[day][time] == 'False' %}
-                <td><button  type="button" class="btn btn-sm btn-secondary" disabled>{{ time }}</button></td>
+            {% for day in  ('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun') %}
+            {% if calendar[day][time] == 'False' %}
+                <td><a href="" class="btn btn-sm btn-secondary" disabled>{{ time }}</a></td>
             {% else %}
-                <td><button  name="time" value="{{ time }} {{ day }}" class="btn btn-sm btn-success" >{{ time }}</button></td>
+                <td><a href="{{ url_for("booking",teacher_id = teacher.id, time = time, day = day) }}" class="btn btn-sm btn-success" style="width:53px">{{ time }}</a></td>
             {% endif %}
             {% endfor %}
           </tr>
